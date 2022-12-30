@@ -82,3 +82,10 @@ android {
         targetSdk = 32
     }
 }
+
+sqldelight {
+    database("TranslateDatabase") {
+        packageName = "com.canonal.translator.database"
+        sourceFolders = listOf("sqldelight")
+    }
+}
