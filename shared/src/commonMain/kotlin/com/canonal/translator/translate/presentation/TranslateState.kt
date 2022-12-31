@@ -14,5 +14,4 @@ data class TranslateState(
     val isChoosingToLanguage: Boolean = false,
     val error: TranslateError? = null,
     val history: List<HistoryItem> = emptyList()
-
 )
