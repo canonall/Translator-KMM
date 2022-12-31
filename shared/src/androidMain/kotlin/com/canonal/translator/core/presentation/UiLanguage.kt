@@ -67,8 +67,6 @@ actual class UiLanguage(
                 )
             }.sortedBy { uiLanguage ->
                 uiLanguage.language.languageName
-
             }
-
     }
 }
