@@ -3,8 +3,8 @@ package com.canonal.translator.translate.presentation
 import com.canonal.translator.core.presentation.UiLanguage
 
 sealed class TranslateEvent {
-    data class ChooseFromLanguage(val language: UiLanguage) : TranslateEvent()
-    data class ChooseToLanguage(val language: UiLanguage) : TranslateEvent()
+    data class ChooseFromLanguage(val uiLanguage: UiLanguage) : TranslateEvent()
+    data class ChooseToLanguage(val uiLanguage: UiLanguage) : TranslateEvent()
     object StopChoosingLanguage : TranslateEvent()
     object SwapLanguages : TranslateEvent()
     data class ChangeTranslationText(val text: String) : TranslateEvent()

@@ -1,4 +1,4 @@
-package com.canonal.translator.android
+package com.canonal.translator.android.core.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,8 +12,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.canonal.translator.android.core.theme.darkColors
-import com.canonal.translator.android.core.theme.lightColors
+import com.canonal.translator.android.R
 
 @Composable
 fun TranslatorTheme(
