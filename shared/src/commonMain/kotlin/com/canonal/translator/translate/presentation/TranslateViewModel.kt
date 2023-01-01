@@ -124,26 +124,32 @@ class TranslateViewModel(
                     )
                 }
             }
-            TranslateEvent.StopChoosingLanguage -> _state.update { translateState ->
-                translateState.copy(
-                    isChoosingFromLanguage = false,
-                    isChoosingToLanguage = false
-                )
+            TranslateEvent.StopChoosingLanguage -> {
+                _state.update { translateState ->
+                    translateState.copy(
+                        isChoosingFromLanguage = false,
+                        isChoosingToLanguage = false
+                    )
+                }
             }
-            is TranslateEvent.SubmitVoiceResult -> _state.update { translateState ->
-                translateState.copy(
-                    fromText = event.result ?: translateState.fromText,
-                    isTranslating = if (event.result != null) false else translateState.isTranslating,
-                    toText = if (event.result != null) null else translateState.toText
-                )
+            is TranslateEvent.SubmitVoiceResult -> {
+                _state.update { translateState ->
+                    translateState.copy(
+                        fromText = event.result ?: translateState.fromText,
+                        isTranslating = if (event.result != null) false else translateState.isTranslating,
+                        toText = if (event.result != null) null else translateState.toText
+                    )
+                }
             }
-            TranslateEvent.SwapLanguages -> _state.update { translateState ->
-                translateState.copy(
-                    fromLanguage = translateState.toLanguage,
-                    toLanguage = translateState.fromLanguage,
-                    fromText = translateState.toText ?: "",
-                    toText = if (translateState.toText != null) translateState.fromText else null
-                )
+            TranslateEvent.SwapLanguages -> {
+                _state.update { translateState ->
+                    translateState.copy(
+                        fromLanguage = translateState.toLanguage,
+                        toLanguage = translateState.fromLanguage,
+                        fromText = translateState.toText ?: "",
+                        toText = if (translateState.toText != null) translateState.fromText else null
+                    )
+                }
             }
             TranslateEvent.Translate -> {
                 translate(state.value)
