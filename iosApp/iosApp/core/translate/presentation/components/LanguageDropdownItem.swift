@@ -7,15 +7,30 @@
 //
 
 import SwiftUI
+import shared
 
 struct LanguageDropdownItem: View {
+    var language: UiLanguage
+    var onClick: () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: onClick) {
+            HStack {
+                if let image = UIImage(named: language.imageName.lowercased()) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .padding(.trailing, 5)
+                    Text(language.language.languageName)
+                        .foregroundColor(.textBlack)
+                }
+            }
+        }
     }
 }
 
 struct LanguageDropdownItem_Previews: PreviewProvider {
     static var previews: some View {
-        LanguageDropdownItem()
+        LanguageDropdownItem(language: UiLanguage.Companion().previewItem, onClick: {})
     }
 }

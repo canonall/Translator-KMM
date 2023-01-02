@@ -20,5 +20,7 @@ actual class UiLanguage(
                     imageName = language.languageName.lowercase()
                 )
             }
+
+        val previewItem = UiLanguage(language = Language.GERMAN, imageName = "german")
     }
 }

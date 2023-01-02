@@ -32,7 +32,7 @@ extension Color {
     // if the theme is dark, uses dark
     // beacuse of the traits.userInterfaceStyle defined below
     // which is called when theme changes
-    static let primary = Color(light: .accentViolet, dark: .accentViolet)
+    static let primaryColor = Color(light: .accentViolet, dark: .accentViolet)
     static let background = Color(light: .lightBlueGrey, dark: .darkGrey)
     static let onPrimary = Color(light: .white, dark: .white)
     static let onBackground = Color(light: .textBlack, dark: .white)
