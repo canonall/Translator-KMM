@@ -11,6 +11,7 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		238162B529636737003752F3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238162B429636737003752F3 /* Colors.swift */; };
+		238162BA29637266003752F3 /* LanguageDropdownItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238162B929637266003752F3 /* LanguageDropdownItem.swift */; };
 		40A02BE9AB576074950D08E6 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA78943B4616DCD1753D5297 /* Pods_iosApp.framework */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -20,6 +21,7 @@
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		238162B429636737003752F3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		238162B929637266003752F3 /* LanguageDropdownItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDropdownItem.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		238162B2296366E2003752F3 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				238162B629637229003752F3 /* translate */,
 				238162B3296366F7003752F3 /* presentation */,
 			);
 			path = core;
@@ -62,6 +65,30 @@
 				238162B429636737003752F3 /* Colors.swift */,
 			);
 			path = presentation;
+			sourceTree = "<group>";
+		};
+		238162B629637229003752F3 /* translate */ = {
+			isa = PBXGroup;
+			children = (
+				238162B729637234003752F3 /* presentation */,
+			);
+			path = translate;
+			sourceTree = "<group>";
+		};
+		238162B729637234003752F3 /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				238162B829637241003752F3 /* components */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		238162B829637241003752F3 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				238162B929637266003752F3 /* LanguageDropdownItem.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		3595EF47F28430FD8FC903E7 /* Pods */ = {
@@ -124,6 +151,7 @@
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				9E4BB094C3B3C5E27DC5F4E6 /* Frameworks */,
+				758A4CAF1B580C81EF1655C3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -197,6 +225,23 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
+		758A4CAF1B580C81EF1655C3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C43EE7538D1CBB3A64EA701C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				238162BA29637266003752F3 /* LanguageDropdownItem.swift in Sources */,
 				238162B529636737003752F3 /* Colors.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
