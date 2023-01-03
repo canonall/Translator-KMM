@@ -2,14 +2,19 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	
-	var body: some View {
-		Text("Can")
-	}
+    
+    private let appModule = AppModule()
+    
+    var body: some View {
+        TranslateScreen(
+            translateUseCase: appModule.translateUseCase,
+            historyDataSource: appModule.historyDataSource
+        )
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
+    static var previews: some View {
+        ContentView()
+    }
 }

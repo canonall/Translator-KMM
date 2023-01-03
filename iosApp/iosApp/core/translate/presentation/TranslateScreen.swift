@@ -7,15 +7,54 @@
 //
 
 import SwiftUI
+import shared
 
 struct TranslateScreen: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    private var translateUseCase: TranslateUseCase
+    private var historyDataSource: HistoryDataSource
+    @ObservedObject var viewModel: IOSTranslateViewModel
+    
+    init(translateUseCase: TranslateUseCase, historyDataSource: HistoryDataSource) {
+        self.translateUseCase = translateUseCase
+        self.historyDataSource = historyDataSource
+        self.viewModel = IOSTranslateViewModel(translateUseCase: translateUseCase, historyDataSource: historyDataSource )
     }
-}
-
-struct TranslateScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        TranslateScreen()
+    
+    var body: some View {
+        ZStack {
+            List {
+                HStack(alignment: .center) {
+                    LanguageDropdown(
+                        language: viewModel.state.fromLanguage,
+                        isOpen: viewModel.state.isChoosingFromLanguage,
+                        selectLanguage: { uiLanguage in
+                            viewModel.onEvent(event: TranslateEvent.ChooseFromLanguage(uiLanguage: uiLanguage))
+                        }
+                    )
+                    Spacer()
+                    SwapLanguageButton(onClick: {
+                        viewModel.onEvent(event: TranslateEvent.SwapLanguages())
+                    })
+                    Spacer()
+                    LanguageDropdown(
+                        language: viewModel.state.toLanguage,
+                        isOpen: viewModel.state.isChoosingToLanguage,
+                        selectLanguage: { uiLanguage in
+                            viewModel.onEvent(event: TranslateEvent.ChooseToLanguage(uiLanguage: uiLanguage))
+                        }
+                    )
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.background)
+            }
+            .listStyle(.plain)
+            .buttonStyle(.plain)
+        }
+        .onAppear {
+            viewModel.startObserving()
+        }
+        .onDisappear {
+            viewModel.dispose()
+        }
     }
 }
