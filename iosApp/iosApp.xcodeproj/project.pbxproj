@@ -63,7 +63,6 @@
 		238162B2296366E2003752F3 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				238162B629637229003752F3 /* translate */,
 				238162B3296366F7003752F3 /* presentation */,
 			);
 			path = core;
@@ -136,6 +135,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				238162B629637229003752F3 /* translate */,
 				238162B2296366E2003752F3 /* core */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
