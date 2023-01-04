@@ -34,9 +34,9 @@ struct TranslateTextField: View {
             TranslatedTextField(
                 fromText: fromText,
                 toText: toText ?? "",
-                fromLanguage: UiLanguage.Companion().previewItem,
-                toLanguage: UiLanguage(language: .english, imageName: "english"),
-                onTranslateEvent: { _ in}
+                fromLanguage: fromLanguage,
+                toLanguage: toLanguage,
+                onTranslateEvent: onTranslateEvent
             )
             .padding()
             .gradientSurface()
@@ -104,6 +104,7 @@ private extension TranslateTextField {
                             .foregroundColor(.lightBlue)
                     }
                     Button {
+                        print("close")
                         onTranslateEvent(TranslateEvent.CloseTranslation())
                     } label: {
                         Image(systemName: "xmark")
@@ -147,7 +148,7 @@ struct TranslateTextField_Previews: PreviewProvider {
             toText: "Translated Test",
             isTranslating: false,
             fromLanguage: UiLanguage.Companion().previewItem,
-            toLanguage: UiLanguage.Companion().previewItem,
+            toLanguage: UiLanguage(language: .english, imageName: "english"),
             onTranslateEvent: { _ in })
     }
 }
