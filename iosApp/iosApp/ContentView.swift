@@ -6,10 +6,15 @@ struct ContentView: View {
     private let appModule = AppModule()
     
     var body: some View {
-        TranslateScreen(
-            translateUseCase: appModule.translateUseCase,
-            historyDataSource: appModule.historyDataSource
-        )
+        ZStack {
+            Color.background
+                .ignoresSafeArea()
+            TranslateScreen(
+                translateUseCase: appModule.translateUseCase,
+                historyDataSource: appModule.historyDataSource
+            )
+        }
+        .hideNavigationBar
     }
 }
 
