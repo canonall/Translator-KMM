@@ -23,45 +23,61 @@ struct TranslateScreen: View {
     var body: some View {
         ZStack {
             List {
-                HStack(alignment: .center) {
-                    LanguageDropdown(
-                        language: viewModel.state.fromLanguage,
-                        isOpen: viewModel.state.isChoosingFromLanguage,
-                        selectLanguage: { uiLanguage in
-                            viewModel.onEvent(event: TranslateEvent.ChooseFromLanguage(uiLanguage: uiLanguage))
-                        }
-                    )
-                    Spacer()
-                    SwapLanguageButton(onClick: {
-                        viewModel.onEvent(event: TranslateEvent.SwapLanguages())
-                    })
-                    Spacer()
-                    LanguageDropdown(
-                        language: viewModel.state.toLanguage,
-                        isOpen: viewModel.state.isChoosingToLanguage,
-                        selectLanguage: { uiLanguage in
-                            viewModel.onEvent(event: TranslateEvent.ChooseToLanguage(uiLanguage: uiLanguage))
-                        }
-                    )
-                }
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color.background)
-                
-                TranslateTextField(
-                    fromText: Binding(
-                        get: { viewModel.state.fromText },
-                        set: {
-                            viewModel.onEvent(event: TranslateEvent.ChangeTranslationText(text: $0))
-                        }
-                    ),
-                    toText: viewModel.state.toText,
-                    isTranslating: viewModel.state.isTranslating,
-                    fromLanguage: viewModel.state.fromLanguage,
-                    toLanguage: viewModel.state.toLanguage,
-                    onTranslateEvent: { event in
-                        viewModel.onEvent(event: event)
+                Group {
+                    HStack(alignment: .center) {
+                        LanguageDropdown(
+                            language: viewModel.state.fromLanguage,
+                            isOpen: viewModel.state.isChoosingFromLanguage,
+                            selectLanguage: { uiLanguage in
+                                viewModel.onEvent(event: TranslateEvent.ChooseFromLanguage(uiLanguage: uiLanguage))
+                            }
+                        )
+                        Spacer()
+                        SwapLanguageButton(onClick: {
+                            viewModel.onEvent(event: TranslateEvent.SwapLanguages())
+                        })
+                        Spacer()
+                        LanguageDropdown(
+                            language: viewModel.state.toLanguage,
+                            isOpen: viewModel.state.isChoosingToLanguage,
+                            selectLanguage: { uiLanguage in
+                                viewModel.onEvent(event: TranslateEvent.ChooseToLanguage(uiLanguage: uiLanguage))
+                            }
+                        )
                     }
-                )
+                    
+                    TranslateTextField(
+                        fromText: Binding(
+                            get: { viewModel.state.fromText },
+                            set: {
+                                viewModel.onEvent(event: TranslateEvent.ChangeTranslationText(text: $0))
+                            }
+                        ),
+                        toText: viewModel.state.toText,
+                        isTranslating: viewModel.state.isTranslating,
+                        fromLanguage: viewModel.state.fromLanguage,
+                        toLanguage: viewModel.state.toLanguage,
+                        onTranslateEvent: { event in
+                            viewModel.onEvent(event: event)
+                        }
+                    )
+                    
+                    if !viewModel.state.history.isEmpty {
+                        Text("History")
+                            .font(.title)
+                            .bold()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    
+                    ForEach(viewModel.state.history, id: \.self.id) { uiHistoryItem in
+                        TranslateHistoryItem(
+                            uiHistoryItem: uiHistoryItem,
+                            onClick: {
+                                viewModel.onEvent(event: TranslateEvent.SelectHistoryItem(item: uiHistoryItem))
+                            }
+                        )
+                    }
+                }
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.background)
             }

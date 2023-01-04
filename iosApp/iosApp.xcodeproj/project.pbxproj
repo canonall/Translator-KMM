@@ -102,8 +102,8 @@
 			children = (
 				238162B829637241003752F3 /* components */,
 				238162C1296381F2003752F3 /* IOSTranslateViewModel.swift */,
-				238162C329638221003752F3 /* TranslateScreen.swift */,
 				23FA70FE29660C760074CF08 /* TextToSpeech.swift */,
+				238162C329638221003752F3 /* TranslateScreen.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
