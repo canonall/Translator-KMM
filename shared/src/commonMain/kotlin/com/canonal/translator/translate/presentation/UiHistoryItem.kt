@@ -8,4 +8,14 @@ data class UiHistoryItem(
     val toText: String,
     val fromLanguage: UiLanguage,
     val toLanguage: UiLanguage
-)
+) {
+    companion object {
+        val previewItem = UiHistoryItem(
+            id = 0,
+            fromText = "Hello",
+            toText = "Hallo",
+            fromLanguage = UiLanguage.byCode("en"),
+            toLanguage = UiLanguage.byCode("de")
+        )
+    }
+}
