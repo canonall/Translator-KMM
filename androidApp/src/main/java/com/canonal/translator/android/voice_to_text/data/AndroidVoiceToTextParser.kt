@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.speech.SpeechRecognizer.ERROR_CLIENT
 import com.canonal.translator.android.R
 import com.canonal.translator.core.domain.util.CommonStateFlow
 import com.canonal.translator.core.domain.util.toCommonStateFlow
@@ -89,6 +90,11 @@ class AndroidVoiceToTextParser(
     }
 
     override fun onError(code: Int) {
+        // ignore error_client (5) because
+        // API returns an error when stopping voice-to-text
+        if (code == ERROR_CLIENT) {
+            return
+        }
         _state.update { voiceToTextParserState ->
             voiceToTextParserState.copy(error = "Error: $code")
         }
