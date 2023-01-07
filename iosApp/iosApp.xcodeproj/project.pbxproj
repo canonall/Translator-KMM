@@ -10,6 +10,8 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		2326C0C42969AFFA002A63D6 /* MicrophonePowerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0C32969AFFA002A63D6 /* MicrophonePowerObserver.swift */; };
+		2326C0C62969B73F002A63D6 /* IOSVoiceToTextParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0C52969B73F002A63D6 /* IOSVoiceToTextParser.swift */; };
 		238162B529636737003752F3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238162B429636737003752F3 /* Colors.swift */; };
 		238162BA29637266003752F3 /* LanguageDropdownItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238162B929637266003752F3 /* LanguageDropdownItem.swift */; };
 		238162BC29637704003752F3 /* LanguageDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238162BB29637704003752F3 /* LanguageDropdown.swift */; };
@@ -32,6 +34,8 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		2326C0C32969AFFA002A63D6 /* MicrophonePowerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophonePowerObserver.swift; sourceTree = "<group>"; };
+		2326C0C52969B73F002A63D6 /* IOSVoiceToTextParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVoiceToTextParser.swift; sourceTree = "<group>"; };
 		238162B429636737003752F3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		238162B929637266003752F3 /* LanguageDropdownItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDropdownItem.swift; sourceTree = "<group>"; };
 		238162BB29637704003752F3 /* LanguageDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDropdown.swift; sourceTree = "<group>"; };
@@ -72,6 +76,23 @@
 				058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2326C0C12969AFB9002A63D6 /* voice_to_text */ = {
+			isa = PBXGroup;
+			children = (
+				2326C0C22969AFDE002A63D6 /* data */,
+			);
+			path = voice_to_text;
+			sourceTree = "<group>";
+		};
+		2326C0C22969AFDE002A63D6 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				2326C0C32969AFFA002A63D6 /* MicrophonePowerObserver.swift */,
+				2326C0C52969B73F002A63D6 /* IOSVoiceToTextParser.swift */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 		238162B2296366E2003752F3 /* core */ = {
@@ -156,6 +177,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				2326C0C12969AFB9002A63D6 /* voice_to_text */,
 				238162B629637229003752F3 /* translate */,
 				238162B2296366E2003752F3 /* core */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -309,6 +331,7 @@
 			files = (
 				23E9F3162964C513004C465D /* ProgressButton.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				2326C0C42969AFFA002A63D6 /* MicrophonePowerObserver.swift in Sources */,
 				23E9F3122964C1AE004C465D /* GradientSurface.swift in Sources */,
 				238162BA29637266003752F3 /* LanguageDropdownItem.swift in Sources */,
 				23E9F3142964C418004C465D /* LanguageDisplay.swift in Sources */,
@@ -323,6 +346,7 @@
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				23FA7101296611ED0074CF08 /* TranslateHistoryItem.swift in Sources */,
 				23E9F3182964C6C5004C465D /* TranslateTextField.swift in Sources */,
+				2326C0C62969B73F002A63D6 /* IOSVoiceToTextParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
