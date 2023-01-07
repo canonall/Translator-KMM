@@ -13,6 +13,8 @@
 		2326C0C42969AFFA002A63D6 /* MicrophonePowerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0C32969AFFA002A63D6 /* MicrophonePowerObserver.swift */; };
 		2326C0C62969B73F002A63D6 /* IOSVoiceToTextParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0C52969B73F002A63D6 /* IOSVoiceToTextParser.swift */; };
 		2326C0C92969C901002A63D6 /* IOSVoiceToTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0C82969C901002A63D6 /* IOSVoiceToTextViewModel.swift */; };
+		2326C0CC2969D864002A63D6 /* VoiceRecorderDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0CB2969D864002A63D6 /* VoiceRecorderDisplay.swift */; };
+		2326C0CE2969DBC7002A63D6 /* VoiceRecorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0CD2969DBC7002A63D6 /* VoiceRecorderButton.swift */; };
 		238162B529636737003752F3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238162B429636737003752F3 /* Colors.swift */; };
 		238162BA29637266003752F3 /* LanguageDropdownItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238162B929637266003752F3 /* LanguageDropdownItem.swift */; };
 		238162BC29637704003752F3 /* LanguageDropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238162BB29637704003752F3 /* LanguageDropdown.swift */; };
@@ -38,6 +40,8 @@
 		2326C0C32969AFFA002A63D6 /* MicrophonePowerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophonePowerObserver.swift; sourceTree = "<group>"; };
 		2326C0C52969B73F002A63D6 /* IOSVoiceToTextParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVoiceToTextParser.swift; sourceTree = "<group>"; };
 		2326C0C82969C901002A63D6 /* IOSVoiceToTextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVoiceToTextViewModel.swift; sourceTree = "<group>"; };
+		2326C0CB2969D864002A63D6 /* VoiceRecorderDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderDisplay.swift; sourceTree = "<group>"; };
+		2326C0CD2969DBC7002A63D6 /* VoiceRecorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecorderButton.swift; sourceTree = "<group>"; };
 		238162B429636737003752F3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		238162B929637266003752F3 /* LanguageDropdownItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDropdownItem.swift; sourceTree = "<group>"; };
 		238162BB29637704003752F3 /* LanguageDropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageDropdown.swift; sourceTree = "<group>"; };
@@ -101,9 +105,19 @@
 		2326C0C72969C8E3002A63D6 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				2326C0CA2969D845002A63D6 /* components */,
 				2326C0C82969C901002A63D6 /* IOSVoiceToTextViewModel.swift */,
 			);
 			path = presentation;
+			sourceTree = "<group>";
+		};
+		2326C0CA2969D845002A63D6 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				2326C0CB2969D864002A63D6 /* VoiceRecorderDisplay.swift */,
+				2326C0CD2969DBC7002A63D6 /* VoiceRecorderButton.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 		238162B2296366E2003752F3 /* core */ = {
@@ -342,6 +356,7 @@
 			files = (
 				23E9F3162964C513004C465D /* ProgressButton.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				2326C0CE2969DBC7002A63D6 /* VoiceRecorderButton.swift in Sources */,
 				2326C0C42969AFFA002A63D6 /* MicrophonePowerObserver.swift in Sources */,
 				23E9F3122964C1AE004C465D /* GradientSurface.swift in Sources */,
 				238162BA29637266003752F3 /* LanguageDropdownItem.swift in Sources */,
@@ -355,6 +370,7 @@
 				238162C429638221003752F3 /* TranslateScreen.swift in Sources */,
 				23FA70FF29660C760074CF08 /* TextToSpeech.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				2326C0CC2969D864002A63D6 /* VoiceRecorderDisplay.swift in Sources */,
 				23FA7101296611ED0074CF08 /* TranslateHistoryItem.swift in Sources */,
 				2326C0C92969C901002A63D6 /* IOSVoiceToTextViewModel.swift in Sources */,
 				23E9F3182964C6C5004C465D /* TranslateTextField.swift in Sources */,
