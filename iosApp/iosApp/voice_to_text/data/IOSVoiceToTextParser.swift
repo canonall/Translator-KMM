@@ -129,15 +129,13 @@ class IOSVoiceToTextParser: VoiceToTextParser, ObservableObject {
                 return
             }
             SFSpeechRecognizer.requestAuthorization { [weak self] status in
-                if status != .authorized {
-                    DispatchQueue.main.async {
-                        if status != .authorized {
-                            self?.updateState(error: "You need to grant permission to transcribe audio.")
-                            self?.stopListening()
-                            return
-                        }
-                        onGranted()
+                DispatchQueue.main.async {
+                    if status != .authorized {
+                        self?.updateState(error: "You need to grant permission to transcribe audio.")
+                        self?.stopListening()
+                        return
                     }
+                    onGranted()
                 }
             }
         }
