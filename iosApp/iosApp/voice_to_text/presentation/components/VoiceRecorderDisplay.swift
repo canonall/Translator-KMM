@@ -35,7 +35,7 @@ struct VoiceRecorderDisplay: View {
                         x: CGFloat(size.width) - CGFloat(index) * 2.0 * barWidth,
                         y: yTopStart,
                         width: barWidth,
-                        height: (centerY - yTopStart * 2.0)
+                        height: (centerY - yTopStart) * 2.0
                     ),
                     cornerSize: CGSize(width: 10.0, height: 10.0)
                 )
