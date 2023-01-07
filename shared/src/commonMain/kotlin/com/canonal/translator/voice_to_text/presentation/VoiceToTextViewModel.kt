@@ -50,8 +50,8 @@ class VoiceToTextViewModel(
                             powerRatios = voiceToTextState.powerRatios + parser.state.value.powerRatio
                         )
                     }
-                    delay(50L)
                 }
+                delay(50L)
             }
         }
     }
