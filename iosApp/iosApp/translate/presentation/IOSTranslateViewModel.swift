@@ -11,11 +11,9 @@ import shared
 
 extension TranslateScreen {
     @MainActor class IOSTranslateViewModel: ObservableObject {
-        private var translateUseCase: TranslateUseCase
-        private var historyDataSource: HistoryDataSource
- 
+        private let translateUseCase: TranslateUseCase
+        private let historyDataSource: HistoryDataSource
         private let viewModel: TranslateViewModel
-        
         private var handle: DisposableHandle?
         
         // kotlin's default arguments don't work here
