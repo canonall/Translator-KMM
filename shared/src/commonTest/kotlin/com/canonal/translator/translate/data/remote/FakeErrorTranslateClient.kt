@@ -2,16 +2,18 @@ package com.canonal.translator.translate.data.remote
 
 import com.canonal.translator.core.domain.language.Language
 import com.canonal.translator.translate.domain.translate.TranslateClient
+import com.canonal.translator.translate.domain.translate.TranslateError
+import com.canonal.translator.translate.domain.translate.TranslateException
 
-class FakeTranslateClient : TranslateClient {
+class FakeErrorTranslateClient: TranslateClient {
 
-    var translatedTest = "test translation"
+    var error = TranslateError.SERVER_ERROR
 
     override suspend fun translate(
         fromLanguage: Language,
         fromText: String,
         toLanguage: Language
     ): String {
-        return translatedTest
+        throw TranslateException(error = error)
     }
 }

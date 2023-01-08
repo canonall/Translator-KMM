@@ -7,6 +7,7 @@ import assertk.assertions.isFalse
 import assertk.assertions.isTrue
 import com.canonal.translator.core.presentation.UiLanguage
 import com.canonal.translator.translate.data.local.FakeHistoryDataSource
+import com.canonal.translator.translate.data.remote.FakeErrorTranslateClient
 import com.canonal.translator.translate.data.remote.FakeTranslateClient
 import com.canonal.translator.translate.domain.history.HistoryItem
 import com.canonal.translator.translate.domain.translate.TranslateUseCase
@@ -85,6 +86,34 @@ class TranslateViewModelTest {
             val resultState = awaitItem()
             assertThat(resultState.isTranslating).isFalse()
             assertThat(resultState.toText).isEqualTo(client.translatedTest)
+        }
+    }
+
+    @Test
+    fun `translate server error - state properly updated`() = runBlocking {
+        val errorClient  = FakeErrorTranslateClient()
+        viewModel = TranslateViewModel(
+            translateUseCase = TranslateUseCase(
+                client = errorClient,
+                historyDataSource = dataSource
+            ),
+            historyDataSource = dataSource,
+            coroutineScope = CoroutineScope(Dispatchers.Default)
+        )
+
+        viewModel.state.test {
+            awaitItem()
+
+            viewModel.onEvent(TranslateEvent.ChangeTranslationText(text = "test"))
+            awaitItem()
+
+            viewModel.onEvent(TranslateEvent.Translate)
+            val loadingState = awaitItem()
+            assertThat(loadingState.isTranslating).isTrue()
+
+            val resultState = awaitItem()
+            assertThat(resultState.isTranslating).isFalse()
+            assertThat(resultState.error).isEqualTo(errorClient.error)
         }
     }
 }
