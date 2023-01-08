@@ -5,7 +5,7 @@ import com.canonal.translator.R
 import com.canonal.translator.core.domain.language.Language
 import java.util.*
 
-actual class UiLanguage(
+actual data class UiLanguage(
     @DrawableRes val drawableRes: Int,
     actual val language: Language
 ) {
