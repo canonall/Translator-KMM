@@ -1,5 +1,6 @@
 package com.canonal.translator.presentation
 
+import android.Manifest
 import android.content.Context
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -7,6 +8,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.rule.GrantPermissionRule
 import com.canonal.translator.android.MainActivity
 import com.canonal.translator.android.R
 import com.canonal.translator.android.di.AppModule
@@ -33,6 +35,12 @@ class VoiceToTextE2E {
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule
+    val permissionRule = GrantPermissionRule.grant(
+        // give permissions for the test class
+        Manifest.permission.RECORD_AUDIO
+    )
 
     @Before
     fun setUp() {
