@@ -3,7 +3,7 @@ import shared
 
 struct ContentView: View {
     
-    private let appModule = AppModule()
+    let appModule: AppModule
     
     var body: some View {
         ZStack {
@@ -11,15 +11,10 @@ struct ContentView: View {
                 .ignoresSafeArea()
             TranslateScreen(
                 translateUseCase: appModule.translateUseCase,
-                historyDataSource: appModule.historyDataSource
+                historyDataSource: appModule.historyDataSource,
+                parser: appModule.voiceToTextParser
             )
         }
         .hideNavigationBar
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

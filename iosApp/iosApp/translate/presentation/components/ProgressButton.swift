@@ -38,7 +38,6 @@ struct ProgressButton: View {
                     .cornerRadius(100)
             }
         }
-
     }
 }
 
