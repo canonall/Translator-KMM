@@ -14,7 +14,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Refresh
-import androidx.compose.material.icons.rounded.Stop
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -101,17 +100,17 @@ fun VoiceToTextScreen(
                         }
                     }
                 }
-            }
-            if (state.displayState == DisplayState.DISPLAYING_RESULTS) {
-                IconButton(
-                    onClick = {
-                        onEvent(VoiceToTextEvent.ToggleRecording(languageCode = languageCode))
-                    }) {
-                    Icon(
-                        imageVector = Icons.Rounded.Refresh,
-                        contentDescription = stringResource(id = R.string.record_again),
-                        tint = LightBlue
-                    )
+                if (state.displayState == DisplayState.DISPLAYING_RESULTS) {
+                    IconButton(
+                        onClick = {
+                            onEvent(VoiceToTextEvent.ToggleRecording(languageCode = languageCode))
+                        }) {
+                        Icon(
+                            imageVector = Icons.Rounded.Refresh,
+                            contentDescription = stringResource(id = R.string.record_again),
+                            tint = LightBlue
+                        )
+                    }
                 }
             }
         }
