@@ -1,9 +1,9 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Deps.kotlinVersion
-    id("com.squareup.sqldelight")
+    id(libs.plugins.kotlin.multiplatform.get().pluginId)
+    id(libs.plugins.kotlin.cocoapods.get().pluginId)
+    id(libs.plugins.android.library.get().pluginId)
+    alias(libs.plugins.kotlin.serialization)
+    id(libs.plugins.sqldelight.get().pluginId)
 }
 
 kotlin {
@@ -23,29 +23,27 @@ kotlin {
             baseName = "shared"
         }
     }
-    
+
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(Deps.ktorCore)
-                implementation(Deps.ktorSerialization)
-                implementation(Deps.ktorSerializationJson)
-                implementation(Deps.sqlDelightRuntime)
-                implementation(Deps.sqlDelightCoroutinesExtensions)
-                implementation(Deps.kotlinDateTime)
+                implementation(libs.bundles.ktor.common)
+                implementation(libs.sqldelight.runtime)
+                implementation(libs.sqldelight.coroutines.extensions)
+                implementation(libs.kotlin.datetime)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation(Deps.assertK)
-                implementation(Deps.turbine)
+                implementation(libs.assertK)
+                implementation(libs.turbine)
             }
         }
         val androidMain by getting {
             dependencies {
-                implementation(Deps.ktorAndroid)
-                implementation(Deps.sqlDelightAndroidDriver)
+                implementation(libs.ktor.android)
+                implementation(libs.sqldelight.android.driver)
             }
         }
         val androidTest by getting
@@ -59,8 +57,8 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
 
             dependencies {
-                implementation(Deps.ktorIOS)
-                implementation(Deps.sqlDelightNativeDriver)
+                implementation(libs.ktor.ios)
+                implementation(libs.sqldelight.native.driver)
             }
         }
         val iosX64Test by getting
@@ -77,10 +75,10 @@ kotlin {
 
 android {
     namespace = "com.canonal.translator"
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         minSdk = 24
-        targetSdk = 32
+        targetSdk = 33
     }
 }
 

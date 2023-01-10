@@ -5,10 +5,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath(Deps.kotlinGradlePlugin)
-        classpath(Deps.androidBuildTools)
-        classpath(Deps.sqlDelightGradlePlugin)
-        classpath(Deps.hiltGradlePlugin)
+        classpath(libs.kotlin.gradle.plugin)
+        classpath(libs.android.tools.gradle.plugin)
+        classpath(libs.sqldelight.gradle.plugin)
+        classpath(libs.hilt.gradle.plugin)
     }
 }
 

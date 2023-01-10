@@ -1,9 +1,9 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
-    kotlin("plugin.serialization") version Deps.kotlinVersion
+   id(libs.plugins.android.application.get().pluginId)
+   id(libs.plugins.kotlin.android.get().pluginId)
+   id(libs.plugins.kotlin.kapt.get().pluginId)
+    id(libs.plugins.dagger.hilt.android.get().pluginId)
+   alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -38,29 +38,23 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation(Deps.composeUi)
-    implementation(Deps.composeUiTooling)
-    implementation(Deps.composeUiToolingPreview)
-    implementation(Deps.composeFoundation)
-    implementation(Deps.composeMaterial)
-    implementation(Deps.activityCompose)
-    implementation(Deps.composeIconsExtended)
-    implementation(Deps.composeNavigation)
-    implementation(Deps.coilCompose)
+    implementation(libs.bundles.compose)
+    implementation(libs.compose.navigation)
+    implementation(libs.coil.compose)
 
-    implementation(Deps.hiltAndroid)
-    kapt(Deps.hiltAndroidCompiler)
-    kapt(Deps.hiltCompiler)
-    implementation(Deps.hiltNavigationCompose)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.hilt.compiler)
 
-    implementation(Deps.ktorAndroid)
+    implementation(libs.ktor.android)
 
-    androidTestImplementation(Deps.testRunner)
-    androidTestImplementation(Deps.jUnit)
-    androidTestImplementation(Deps.composeTesting)
-    androidTestImplementation(Deps.rules)
-    debugImplementation(Deps.composeTestManifest)
+    androidTestImplementation(libs.testrunner)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.compose.testing)
+    androidTestImplementation(libs.rules)
+    debugImplementation(libs.compose.testing.manifest)
 
-    kaptAndroidTest(Deps.hiltAndroidCompiler)
-    androidTestImplementation(Deps.hiltTesting)
+    kaptAndroidTest(libs.hilt.android.compiler)
+    androidTestImplementation(libs.hilt.testing)
 }
