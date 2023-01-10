@@ -3,6 +3,7 @@ plugins {
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.kotlin.kapt.get().pluginId)
     id(libs.plugins.dagger.hilt.android.get().pluginId)
+    alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -34,6 +35,14 @@ android {
             isMinifyEnabled = false
         }
     }
+    // use ksp generated folder, used by compose destinations
+    applicationVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -43,6 +52,8 @@ dependencies {
     implementation(libs.coil.compose)
 
     implementation(libs.hilt.android)
+    implementation(libs.compose.destinations)
+    ksp(libs.compose.destinations.ksp)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.android.compiler)
     kapt(libs.hilt.compiler)
