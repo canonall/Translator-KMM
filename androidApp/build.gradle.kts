@@ -1,9 +1,9 @@
 plugins {
-   id(libs.plugins.android.application.get().pluginId)
-   id(libs.plugins.kotlin.android.get().pluginId)
-   id(libs.plugins.kotlin.kapt.get().pluginId)
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
     id(libs.plugins.dagger.hilt.android.get().pluginId)
-   alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {

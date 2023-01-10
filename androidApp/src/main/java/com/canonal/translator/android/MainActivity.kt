@@ -99,14 +99,16 @@ fun TranslateRoot() {
                         "voiceResult", spokenText
                     )
                     navController.popBackStack()
-                }, onEvent = { event ->
+                },
+                onEvent = { event ->
                     when (event) {
                         VoiceToTextEvent.Close -> {
                             navController.popBackStack()
                         }
                         else -> viewModel.onEvent(event = event)
                     }
-                })
+                }
+            )
         }
     }
 }
