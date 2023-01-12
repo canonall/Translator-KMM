@@ -7,6 +7,7 @@ import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.SpeechRecognizer.ERROR_CLIENT
+import android.util.Log
 import com.canonal.translator.android.R
 import com.canonal.translator.core.domain.util.CommonStateFlow
 import com.canonal.translator.core.domain.util.toCommonStateFlow
@@ -96,7 +97,8 @@ class AndroidVoiceToTextParser(
             return
         }
         _state.update { voiceToTextParserState ->
-            voiceToTextParserState.copy(error = "Error: $code")
+            Log.d("AndroidVoiceToTextParser", "onError: $code")
+            voiceToTextParserState.copy(error = application.getString(R.string.error_speech_recognition_failed))
         }
     }
 
