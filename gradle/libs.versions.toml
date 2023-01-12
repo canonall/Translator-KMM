@@ -2,6 +2,7 @@
 android-tools = "7.2.2"
 assertK = "0.25"
 compose = "1.4.0-alpha02"
+compose-compiler = "1.4.0-alpha02"
 compose-activity = "1.6.1"
 compose-destinations = "1.7.30-beta"
 compose-navigation = "2.5.3"
