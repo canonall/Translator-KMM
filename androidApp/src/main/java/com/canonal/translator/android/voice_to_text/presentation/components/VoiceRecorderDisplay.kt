@@ -80,7 +80,7 @@ fun VoiceRecorderDisplay(
 fun VoiceRecorderDisplayPreview() {
     TranslatorTheme {
         VoiceRecorderDisplay(
-            powerRatioList = (0..100).map { number ->
+            powerRatioList = (0..100).map {
                 Random.nextFloat()
             },
             modifier = Modifier
