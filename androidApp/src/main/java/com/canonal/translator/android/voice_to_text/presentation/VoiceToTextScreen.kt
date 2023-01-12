@@ -16,6 +16,8 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -24,27 +26,32 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.canonal.translator.android.R
 import com.canonal.translator.android.core.theme.LightBlue
 import com.canonal.translator.android.voice_to_text.presentation.components.VoiceRecorderDisplay
 import com.canonal.translator.voice_to_text.presentation.DisplayState
 import com.canonal.translator.voice_to_text.presentation.VoiceToTextEvent
-import com.canonal.translator.voice_to_text.presentation.VoiceToTextState
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.result.ResultBackNavigator
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
+@Destination
 fun VoiceToTextScreen(
-    state: VoiceToTextState,
     languageCode: String,
-    onResult: (String) -> Unit,
-    onEvent: (VoiceToTextEvent) -> Unit
+    viewModel: AndroidVoiceToTextViewModel = hiltViewModel(),
+    navigator: DestinationsNavigator,
+    resultNavigator: ResultBackNavigator<String>
 ) {
     val context = LocalContext.current
+    val state by viewModel.state.collectAsState()
     val recordAudioLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { isGranted ->
-            onEvent(
-                VoiceToTextEvent.PermissionResult(
+            viewModel.onEvent(
+                event = VoiceToTextEvent.PermissionResult(
                     isGranted = isGranted,
                     isPermanentlyDeclined = !isGranted && !(context as ComponentActivity)
                         .shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)
@@ -52,6 +59,7 @@ fun VoiceToTextScreen(
             )
         }
     )
+
     LaunchedEffect(key1 = recordAudioLauncher) {
         recordAudioLauncher.launch(Manifest.permission.RECORD_AUDIO)
     }
@@ -65,9 +73,9 @@ fun VoiceToTextScreen(
                 FloatingActionButton(
                     onClick = {
                         if (state.displayState != DisplayState.DISPLAYING_RESULTS) {
-                            onEvent(VoiceToTextEvent.ToggleRecording(languageCode))
+                            viewModel.onEvent(event = VoiceToTextEvent.ToggleRecording(languageCode))
                         } else {
-                            onResult(state.spokenText)
+                            resultNavigator.navigateBack(result = state.spokenText)
                         }
                     },
                     backgroundColor = MaterialTheme.colors.primary,
@@ -103,7 +111,7 @@ fun VoiceToTextScreen(
                 if (state.displayState == DisplayState.DISPLAYING_RESULTS) {
                     IconButton(
                         onClick = {
-                            onEvent(VoiceToTextEvent.ToggleRecording(languageCode = languageCode))
+                            viewModel.onEvent(event = VoiceToTextEvent.ToggleRecording(languageCode = languageCode))
                         }) {
                         Icon(
                             imageVector = Icons.Rounded.Refresh,
@@ -123,7 +131,7 @@ fun VoiceToTextScreen(
             Box(modifier = Modifier.fillMaxWidth()) {
                 IconButton(
                     onClick = {
-                        onEvent(VoiceToTextEvent.Close)
+                        navigator.popBackStack()
                     },
                     modifier = Modifier.align(Alignment.CenterStart)
                 ) {

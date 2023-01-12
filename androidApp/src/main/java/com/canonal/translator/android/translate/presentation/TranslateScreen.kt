@@ -8,6 +8,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -19,20 +21,31 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.canonal.translator.android.R
+import com.canonal.translator.android.destinations.VoiceToTextScreenDestination
 import com.canonal.translator.android.translate.presentation.components.*
 import com.canonal.translator.translate.domain.translate.TranslateError
 import com.canonal.translator.translate.presentation.TranslateEvent
-import com.canonal.translator.translate.presentation.TranslateState
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.result.NavResult
+import com.ramcosta.composedestinations.result.ResultRecipient
 import java.util.*
 
 @OptIn(ExperimentalComposeUiApi::class)
+@RootNavGraph(start = true)
+@Destination
 @Composable
 fun TranslateScreen(
-    state: TranslateState,
-    onEvent: (TranslateEvent) -> Unit
+    viewModel: AndroidTranslateViewModel = hiltViewModel(),
+    navigator: DestinationsNavigator,
+    resultRecipient: ResultRecipient<VoiceToTextScreenDestination, String>
 ) {
     val context = LocalContext.current
+    val state by viewModel.state.collectAsState()
+    var voiceResult: String? = null
 
     // triggered whenever a certain piece of state changes
     LaunchedEffect(key1 = state.error) {
@@ -46,7 +59,20 @@ fun TranslateScreen(
         message?.let { errorMessage ->
             Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
             // reset error message after it is shown
-            onEvent(TranslateEvent.OnErrorSeen)
+            viewModel.onEvent(event = TranslateEvent.OnErrorSeen)
+        }
+    }
+
+    LaunchedEffect(key1 = voiceResult) {
+        viewModel.onEvent(event = TranslateEvent.SubmitVoiceResult(result = voiceResult))
+    }
+
+    resultRecipient.onNavResult { result ->
+        when (result) {
+            NavResult.Canceled -> Unit
+            is NavResult.Value -> {
+                voiceResult = result.value
+            }
         }
     }
 
@@ -54,7 +80,11 @@ fun TranslateScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    onEvent(TranslateEvent.RecordAudio)
+                    navigator.navigate(
+                        VoiceToTextScreenDestination(
+                            languageCode = state.fromLanguage.language.languageCode
+                        )
+                    )
                 },
                 backgroundColor = MaterialTheme.colors.primary,
                 contentColor = MaterialTheme.colors.onPrimary,
@@ -86,31 +116,31 @@ fun TranslateScreen(
                         uiLanguage = state.fromLanguage,
                         isOpen = state.isChoosingFromLanguage,
                         onClick = {
-                            onEvent(TranslateEvent.OpenFromLanguageDropdown)
+                            viewModel.onEvent(event = TranslateEvent.OpenFromLanguageDropdown)
                         },
                         onDismiss = {
-                            onEvent(TranslateEvent.StopChoosingLanguage)
+                            viewModel.onEvent(event = TranslateEvent.StopChoosingLanguage)
                         },
                         onSelectLanguage = { uiLanguage ->
-                            onEvent(TranslateEvent.ChooseFromLanguage(uiLanguage = uiLanguage))
+                            viewModel.onEvent(event = TranslateEvent.ChooseFromLanguage(uiLanguage = uiLanguage))
                         }
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     SwapLanguagesButton(onClick = {
-                        onEvent(TranslateEvent.SwapLanguages)
+                        viewModel.onEvent(event = TranslateEvent.SwapLanguages)
                     })
                     Spacer(modifier = Modifier.weight(1f))
                     LanguageDropDown(
                         uiLanguage = state.toLanguage,
                         isOpen = state.isChoosingToLanguage,
                         onClick = {
-                            onEvent(TranslateEvent.OpenToLanguageDropdown)
+                            viewModel.onEvent(event = TranslateEvent.OpenToLanguageDropdown)
                         },
                         onDismiss = {
-                            onEvent(TranslateEvent.StopChoosingLanguage)
+                            viewModel.onEvent(event = TranslateEvent.StopChoosingLanguage)
                         },
                         onSelectLanguage = { uiLanguage ->
-                            onEvent(TranslateEvent.ChooseToLanguage(uiLanguage = uiLanguage))
+                            viewModel.onEvent(event = TranslateEvent.ChooseToLanguage(uiLanguage = uiLanguage))
                         }
                     )
                 }
@@ -128,10 +158,10 @@ fun TranslateScreen(
                     toLanguage = state.toLanguage,
                     onTranslateClick = {
                         keyboardController?.hide()
-                        onEvent(TranslateEvent.Translate)
+                        viewModel.onEvent(event = TranslateEvent.Translate)
                     },
                     onTextChange = { text ->
-                        onEvent(TranslateEvent.ChangeTranslationText(text))
+                        viewModel.onEvent(event = TranslateEvent.ChangeTranslationText(text))
                     },
                     onCopyClick = { text ->
                         clipboardManager.setText(
@@ -146,7 +176,7 @@ fun TranslateScreen(
                         ).show()
                     },
                     onCloseClick = {
-                        onEvent(TranslateEvent.CloseTranslation)
+                        viewModel.onEvent(event = TranslateEvent.CloseTranslation)
                     },
                     onSpeakerClick = {
                         textToSpeech.language = state.toLanguage.toLocale() ?: Locale.ENGLISH
@@ -158,7 +188,7 @@ fun TranslateScreen(
                         )
                     },
                     onTextFieldClick = {
-                        onEvent(TranslateEvent.EditTranslation)
+                        viewModel.onEvent(event = TranslateEvent.EditTranslation)
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -175,7 +205,7 @@ fun TranslateScreen(
                 TranslateHistoryItem(
                     uiHistoryItem = item,
                     onClick = {
-                        onEvent(TranslateEvent.SelectHistoryItem(item))
+                        viewModel.onEvent(event = TranslateEvent.SelectHistoryItem(item))
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
