@@ -5,5 +5,4 @@ import dagger.hilt.android.HiltAndroidApp
 
 // Don't forget to add in manifest with name attribute
 @HiltAndroidApp
-class TranslateApp: Application() {
-}
+class TranslateApp: Application()
