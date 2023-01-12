@@ -45,7 +45,7 @@ fun TranslateScreen(
 ) {
     val context = LocalContext.current
     val state by viewModel.state.collectAsState()
-    var voiceResult: String? = null
+    //var voiceResult: String? = null
 
     // triggered whenever a certain piece of state changes
     LaunchedEffect(key1 = state.error) {
@@ -63,15 +63,11 @@ fun TranslateScreen(
         }
     }
 
-    LaunchedEffect(key1 = voiceResult) {
-        viewModel.onEvent(event = TranslateEvent.SubmitVoiceResult(result = voiceResult))
-    }
-
     resultRecipient.onNavResult { result ->
         when (result) {
             NavResult.Canceled -> Unit
             is NavResult.Value -> {
-                voiceResult = result.value
+                viewModel.onEvent(event = TranslateEvent.SubmitVoiceResult(result = result.value))
             }
         }
     }
