@@ -176,7 +176,7 @@ class VoiceToTextE2E {
             .performClick()
 
         composeRule
-            .onNodeWithTag("VoiceRecorderDisplay")
+            .onNodeWithContentDescription("VoiceRecorderDisplay")
             .assertIsDisplayed()
 
         parser.setVoiceResultAfterRefresh()
