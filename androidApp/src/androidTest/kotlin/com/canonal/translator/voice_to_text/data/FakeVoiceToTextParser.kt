@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.update
 class FakeVoiceToTextParser : VoiceToTextParser {
 
     var voiceResult = "test result"
+    var voiceResultAfterRefresh = "test result after refresh"
+    var error = "Speech recognition is failed due to an error."
 
     private val _state = MutableStateFlow(VoiceToTextParserState())
     override val state: CommonStateFlow<VoiceToTextParserState>
@@ -25,6 +27,24 @@ class FakeVoiceToTextParser : VoiceToTextParser {
     }
 
     override fun stopListening() {
+        _state.update { VoiceToTextParserState() }
+    }
+
+    override fun cancel() = Unit
+
+    override fun reset() {
+        _state.update { VoiceToTextParserState() }
+    }
+
+    fun errorDuringListening() {
+        _state.update { voiceToTextParserState ->
+            voiceToTextParserState.copy(
+                error = error
+            )
+        }
+    }
+
+    fun setVoiceResult() {
         _state.update { voiceToTextParserState ->
             voiceToTextParserState.copy(
                 result = voiceResult,
@@ -33,9 +53,12 @@ class FakeVoiceToTextParser : VoiceToTextParser {
         }
     }
 
-    override fun cancel() = Unit
-
-    override fun reset() {
-        _state.update { VoiceToTextParserState() }
+    fun setVoiceResultAfterRefresh() {
+        _state.update { voiceToTextParserState ->
+            voiceToTextParserState.copy(
+                result = voiceResultAfterRefresh,
+                isSpeaking = false
+            )
+        }
     }
 }

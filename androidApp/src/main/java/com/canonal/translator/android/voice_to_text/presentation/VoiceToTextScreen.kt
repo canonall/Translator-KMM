@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
@@ -131,6 +132,7 @@ fun VoiceToTextScreen(
             Box(modifier = Modifier.fillMaxWidth()) {
                 IconButton(
                     onClick = {
+                        viewModel.onEvent(event = VoiceToTextEvent.Reset)
                         navigator.popBackStack()
                     },
                     modifier = Modifier.align(Alignment.CenterStart)
@@ -173,6 +175,7 @@ fun VoiceToTextScreen(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(100.dp)
+                                    .testTag("VoiceRecorderDisplay")
                             )
                         }
                         DisplayState.DISPLAYING_RESULTS -> {

@@ -2,11 +2,8 @@ package com.canonal.translator.presentation
 
 import android.Manifest
 import android.content.Context
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithContentDescription
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.rule.GrantPermissionRule
 import com.canonal.translator.android.MainActivity
@@ -20,12 +17,16 @@ import com.canonal.translator.voice_to_text.domain.VoiceToTextParser
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltAndroidTest
 @UninstallModules(AppModule::class, VoiceToTextModule::class)
 class VoiceToTextE2E {
@@ -54,7 +55,7 @@ class VoiceToTextE2E {
     lateinit var fakeClient: TranslateClient
 
     @Test
-    fun recordAndTranslate() = runBlocking<Unit> {
+    fun recordAndTranslate() = runTest {
         val context = ApplicationProvider.getApplicationContext<Context>()
         val parser = fakeVoiceToTextParser as FakeVoiceToTextParser
         val client = fakeClient as FakeTranslateClient
@@ -70,6 +71,8 @@ class VoiceToTextE2E {
         composeRule
             .onNodeWithContentDescription(context.getString(R.string.stop_recording))
             .performClick()
+
+        parser.setVoiceResult()
 
         composeRule
             .onNodeWithText(parser.voiceResult)
@@ -94,6 +97,124 @@ class VoiceToTextE2E {
         composeRule
             .onNodeWithText(client.translatedTest)
             .assertIsDisplayed()
+    }
 
+    @Test
+    fun recordAndError() = runTest {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val errorParser = fakeVoiceToTextParser as FakeVoiceToTextParser
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.record_audio))
+            .performClick()
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.record_audio))
+            .performClick()
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.stop_recording))
+            .performClick()
+
+        errorParser.errorDuringListening()
+
+        composeRule
+            .onNodeWithText(errorParser.error)
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun recordAndCancel() = runTest {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.record_audio))
+            .performClick()
+
+        composeRule
+            .onNodeWithText(context.getString(R.string.start_talking))
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.record_audio))
+            .performClick()
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.stop_recording))
+            .performClick()
+
+        composeRule
+            .onNodeWithText(context.getString(R.string.start_talking))
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun recordAndRefresh() = runTest {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val parser = fakeVoiceToTextParser as FakeVoiceToTextParser
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.record_audio))
+            .performClick()
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.record_audio))
+            .performClick()
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.stop_recording))
+            .performClick()
+
+        parser.setVoiceResult()
+
+        composeRule
+            .onNodeWithText(parser.voiceResult)
+            .assertIsDisplayed()
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.record_again))
+            .performClick()
+
+        composeRule
+            .onNodeWithTag("VoiceRecorderDisplay")
+            .assertIsDisplayed()
+
+        parser.setVoiceResultAfterRefresh()
+
+        composeRule
+            .onNodeWithText(parser.voiceResultAfterRefresh)
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun navigateBackWithXButton() = runTest {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val parser = fakeVoiceToTextParser as FakeVoiceToTextParser
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.record_audio))
+            .performClick()
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.record_audio))
+            .performClick()
+
+        val job = launch {
+            delay(5000L)
+            parser.setVoiceResult()
+            composeRule
+                .onNodeWithContentDescription(context.getString(R.string.apply))
+                .performClick()
+        }
+
+        composeRule
+            .onNodeWithContentDescription(context.getString(R.string.close))
+            .performClick()
+
+        composeRule
+            .onNodeWithText(parser.voiceResult)
+            .assertDoesNotExist()
+
+        job.cancel()
     }
 }
