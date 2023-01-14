@@ -8,6 +8,7 @@ import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.canonal.translator.core.presentation.UiLanguage
@@ -20,7 +21,7 @@ fun LanguageDropdownItem(
 ) {
     DropdownMenuItem(
         onClick = onClick,
-        modifier = modifier
+        modifier = modifier.testTag(uiLanguage.language.languageCode)
     ) {
         Image(
             painter = painterResource(id = uiLanguage.drawableRes),

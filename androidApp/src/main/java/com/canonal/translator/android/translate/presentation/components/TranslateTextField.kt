@@ -17,8 +17,12 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.canonal.translator.android.R
@@ -62,6 +66,7 @@ fun TranslateTextField(
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(2f)
+                        .testTag("IdleTranslateTextField")
                 )
             } else {
                 TranslatedTextField(
@@ -72,7 +77,9 @@ fun TranslateTextField(
                     onCopyClick = onCopyClick,
                     onCloseClick = onCloseClick,
                     onSpeakerClick = onSpeakerClick,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("TranslatedTextField")
                 )
             }
         }
@@ -90,6 +97,8 @@ private fun TranslatedTextField(
     onSpeakerClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+
     Column(
         modifier = modifier
     ) {
@@ -97,7 +106,10 @@ private fun TranslatedTextField(
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = fromText,
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colors.onSurface,
+            modifier = Modifier.semantics {
+                contentDescription = context.getString(R.string.original_text)
+            }
         )
         Spacer(modifier = Modifier.height(16.dp))
         Row(
@@ -108,7 +120,7 @@ private fun TranslatedTextField(
             }) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.copy),
-                    contentDescription = stringResource(id = R.string.copy),
+                    contentDescription = stringResource(id = R.string.copy_from_translation),
                     tint = LightBlue
                 )
             }
@@ -127,7 +139,10 @@ private fun TranslatedTextField(
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = toText,
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colors.onSurface,
+            modifier = Modifier.semantics {
+                contentDescription = context.getString(R.string.translated_text)
+            }
         )
         Spacer(modifier = Modifier.height(16.dp))
         Row(
@@ -138,7 +153,7 @@ private fun TranslatedTextField(
             }) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.copy),
-                    contentDescription = stringResource(id = R.string.copy),
+                    contentDescription = stringResource(id = R.string.copy_to_translation),
                     tint = LightBlue
                 )
             }
@@ -162,6 +177,7 @@ private fun IdleTranslateTextField(
     modifier: Modifier = Modifier
 ) {
     var isFocused by remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     Box(modifier = modifier) {
         BasicTextField(
@@ -170,7 +186,11 @@ private fun IdleTranslateTextField(
             cursorBrush = SolidColor(MaterialTheme.colors.primary),
             modifier = Modifier
                 .fillMaxSize()
-                .onFocusChanged { isFocused = it.isFocused },
+                .onFocusChanged { isFocused = it.isFocused }
+                .semantics {
+                    contentDescription =
+                        context.getString(R.string.idle_textfield_content_description)
+                },
             textStyle = TextStyle(
                 color = MaterialTheme.colors.onSurface
             )

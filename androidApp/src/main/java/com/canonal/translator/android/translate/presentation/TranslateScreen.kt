@@ -17,8 +17,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -45,7 +48,6 @@ fun TranslateScreen(
 ) {
     val context = LocalContext.current
     val state by viewModel.state.collectAsState()
-    //var voiceResult: String? = null
 
     // triggered whenever a certain piece of state changes
     LaunchedEffect(key1 = state.error) {
@@ -103,8 +105,7 @@ fun TranslateScreen(
         ) {
             item {
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
@@ -119,6 +120,10 @@ fun TranslateScreen(
                         },
                         onSelectLanguage = { uiLanguage ->
                             viewModel.onEvent(event = TranslateEvent.ChooseFromLanguage(uiLanguage = uiLanguage))
+                        },
+                        modifier = Modifier.semantics {
+                            contentDescription =
+                                context.getString(R.string.from_language_dropdown_content_description)
                         }
                     )
                     Spacer(modifier = Modifier.weight(1f))
@@ -137,6 +142,10 @@ fun TranslateScreen(
                         },
                         onSelectLanguage = { uiLanguage ->
                             viewModel.onEvent(event = TranslateEvent.ChooseToLanguage(uiLanguage = uiLanguage))
+                        },
+                        modifier = Modifier.semantics {
+                            contentDescription =
+                                context.getString(R.string.to_language_dropdown_content_description)
                         }
                     )
                 }
@@ -186,7 +195,9 @@ fun TranslateScreen(
                     onTextFieldClick = {
                         viewModel.onEvent(event = TranslateEvent.EditTranslation)
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("TranslateTextField")
                 )
             }
             item {
@@ -203,7 +214,9 @@ fun TranslateScreen(
                     onClick = {
                         viewModel.onEvent(event = TranslateEvent.SelectHistoryItem(item))
                     },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag(item.id.toString())
                 )
             }
         }

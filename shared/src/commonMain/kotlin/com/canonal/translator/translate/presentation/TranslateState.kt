@@ -1,7 +1,6 @@
 package com.canonal.translator.translate.presentation
 
 import com.canonal.translator.core.presentation.UiLanguage
-import com.canonal.translator.translate.domain.history.HistoryItem
 import com.canonal.translator.translate.domain.translate.TranslateError
 
 data class TranslateState(
