@@ -6,11 +6,8 @@ import com.canonal.translator.core.presentation.UiLanguage
 import com.canonal.translator.translate.domain.history.HistoryDataSource
 import com.canonal.translator.translate.domain.translate.TranslateException
 import com.canonal.translator.translate.domain.translate.TranslateUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 
 class TranslateViewModel(
     private val translateUseCase: TranslateUseCase,
@@ -171,6 +168,7 @@ class TranslateViewModel(
                     isTranslating = true
                 )
             }
+            delay(200L)
             val result = translateUseCase.execute(
                 fromLanguage = state.fromLanguage.language,
                 fromText = state.fromText,
