@@ -24,7 +24,7 @@ fun TranslatorTheme(
     } else {
         lightColors
     }
-    val SfProText = FontFamily(
+    val sfProText = FontFamily(
         Font(
             resId = R.font.sf_pro_text_regular,
             weight = FontWeight.Normal
@@ -40,27 +40,27 @@ fun TranslatorTheme(
     )
     val typography = Typography(
         h1 = TextStyle(
-            fontFamily = SfProText,
+            fontFamily = sfProText,
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp
         ),
         h2 = TextStyle(
-            fontFamily = SfProText,
+            fontFamily = sfProText,
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp
         ),
         h3 = TextStyle(
-            fontFamily = SfProText,
+            fontFamily = sfProText,
             fontWeight = FontWeight.Medium,
             fontSize = 18.sp
         ),
         body1 = TextStyle(
-            fontFamily = SfProText,
+            fontFamily = sfProText,
             fontWeight = FontWeight.Normal,
             fontSize = 14.sp
         ),
         body2 = TextStyle(
-            fontFamily = SfProText,
+            fontFamily = sfProText,
             fontWeight = FontWeight.Normal,
             fontSize = 12.sp
         )
