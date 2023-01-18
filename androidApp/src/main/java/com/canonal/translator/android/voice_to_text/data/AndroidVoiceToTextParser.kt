@@ -8,7 +8,7 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.SpeechRecognizer.ERROR_CLIENT
 import android.util.Log
-import com.canonal.translator.android.R
+import com.canonal.translator.R
 import com.canonal.translator.core.domain.util.CommonStateFlow
 import com.canonal.translator.core.domain.util.toCommonStateFlow
 import com.canonal.translator.voice_to_text.domain.VoiceToTextParser

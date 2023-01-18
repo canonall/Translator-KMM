@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.canonal.translator.android.R
+import com.canonal.translator.R
 import com.canonal.translator.android.core.theme.LightBlue
 import com.canonal.translator.core.presentation.UiLanguage
 

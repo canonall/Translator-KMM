@@ -25,7 +25,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.canonal.translator.android.R
+import com.canonal.translator.R
 import com.canonal.translator.android.destinations.VoiceToTextScreenDestination
 import com.canonal.translator.android.translate.presentation.components.*
 import com.canonal.translator.translate.domain.translate.TranslateError
@@ -89,7 +89,7 @@ fun TranslateScreen(
                 modifier = Modifier.size(75.dp)
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.mic),
+                    imageVector = ImageVector.vectorResource(id = com.canonal.translator.android.R.drawable.mic),
                     contentDescription = stringResource(id = R.string.record_audio)
                 )
             }

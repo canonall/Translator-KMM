@@ -25,7 +25,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.canonal.translator.android.R
+import com.canonal.translator.R
 import com.canonal.translator.android.core.theme.LightBlue
 import com.canonal.translator.core.presentation.UiLanguage
 
@@ -119,7 +119,7 @@ private fun TranslatedTextField(
                 onCopyClick(fromText)
             }) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.copy),
+                    imageVector = ImageVector.vectorResource(id = com.canonal.translator.android.R.drawable.copy),
                     contentDescription = stringResource(id = R.string.copy_from_translation),
                     tint = LightBlue
                 )
@@ -152,14 +152,14 @@ private fun TranslatedTextField(
                 onCopyClick(toText)
             }) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.copy),
+                    imageVector = ImageVector.vectorResource(id = com.canonal.translator.android.R.drawable.copy),
                     contentDescription = stringResource(id = R.string.copy_to_translation),
                     tint = LightBlue
                 )
             }
             IconButton(onClick = onSpeakerClick) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.speaker),
+                    imageVector = ImageVector.vectorResource(id = com.canonal.translator.android.R.drawable.speaker),
                     contentDescription = stringResource(id = R.string.play_loud),
                     tint = LightBlue
                 )

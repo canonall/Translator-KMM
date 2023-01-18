@@ -29,7 +29,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.canonal.translator.android.R
+import com.canonal.translator.R
 import com.canonal.translator.android.core.theme.LightBlue
 import com.canonal.translator.android.voice_to_text.presentation.components.VoiceRecorderDisplay
 import com.canonal.translator.voice_to_text.presentation.DisplayState
@@ -102,7 +102,7 @@ fun VoiceToTextScreen(
                             }
                             else -> {
                                 Icon(
-                                    imageVector = ImageVector.vectorResource(id = R.drawable.mic),
+                                    imageVector = ImageVector.vectorResource(id = com.canonal.translator.android.R.drawable.mic),
                                     contentDescription = stringResource(id = R.string.record_audio),
                                     modifier = Modifier.size(50.dp)
                                 )

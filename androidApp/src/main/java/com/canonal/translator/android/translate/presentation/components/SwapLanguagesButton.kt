@@ -11,7 +11,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import com.canonal.translator.android.R
+import com.canonal.translator.R
+import com.canonal.translator.shared.SharedRes.strings.swap_languages
 
 @Composable
 fun SwapLanguagesButton(
@@ -25,7 +26,7 @@ fun SwapLanguagesButton(
             .background(MaterialTheme.colors.primary)
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(id = R.drawable.swap_languages),
+            imageVector = ImageVector.vectorResource(id = com.canonal.translator.android.R.drawable.swap_languages),
             contentDescription = stringResource(id = R.string.swap_languages),
             tint = MaterialTheme.colors.onPrimary
         )
