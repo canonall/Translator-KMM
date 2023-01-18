@@ -4,6 +4,7 @@ plugins {
     id(libs.plugins.android.library.get().pluginId)
     alias(libs.plugins.kotlin.serialization)
     id(libs.plugins.sqldelight.get().pluginId)
+    alias(libs.plugins.moko.resources)
 }
 
 kotlin {
@@ -21,6 +22,7 @@ kotlin {
         framework {
             isStatic = false
             baseName = "shared"
+            export(libs.moko.resources)
         }
     }
 
@@ -31,6 +33,7 @@ kotlin {
                 implementation(libs.sqldelight.runtime)
                 implementation(libs.sqldelight.coroutines.extensions)
                 implementation(libs.kotlin.datetime)
+                api(libs.moko.resources)
             }
         }
         val commonTest by getting {
@@ -38,12 +41,14 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation(libs.assertK)
                 implementation(libs.turbine)
+                implementation(libs.moko.resources.test)
             }
         }
         val androidMain by getting {
             dependencies {
                 implementation(libs.ktor.android)
                 implementation(libs.sqldelight.android.driver)
+                api(libs.moko.resources.compose)
             }
         }
         val androidTest by getting
@@ -71,6 +76,11 @@ kotlin {
             iosSimulatorArm64Test.dependsOn(this)
         }
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.canonal.translator.shared"
+    multiplatformResourcesClassName = "SharedRes"
 }
 
 android {
