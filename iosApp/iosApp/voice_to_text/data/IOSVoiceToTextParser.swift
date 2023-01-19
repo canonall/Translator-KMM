@@ -124,14 +124,14 @@ class IOSVoiceToTextParser: VoiceToTextParser, ObservableObject {
     private func requestPermissions(onGranted: @escaping () -> Void) {
         audioSession?.requestRecordPermission{ [weak self] wasGranted in
             if !wasGranted {
-                self?.updateState(error: "You need to grant permission to record your voice.")
+                self?.updateState(error: Resources.string.permission_record_voice.localized)
                 self?.stopListening()
                 return
             }
             SFSpeechRecognizer.requestAuthorization { [weak self] status in
                 DispatchQueue.main.async {
                     if status != .authorized {
-                        self?.updateState(error: "You need to grant permission to transcribe audio.")
+                        self?.updateState(error: Resources.string.permission_transcribe_audio.localized)
                         self?.stopListening()
                         return
                     }

@@ -66,7 +66,7 @@ struct TranslateScreen: View {
                     )
                     
                     if !viewModel.state.history.isEmpty {
-                        Text("History")
+                        Text(Resources.string.history.localized)
                             .font(.title)
                             .bold()
                             .frame(maxWidth: .infinity, alignment: .leading)

@@ -10,6 +10,7 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		231DEC1D2978ADD00011B55D /* StringResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231DEC1C2978ADD00011B55D /* StringResource.swift */; };
 		2326C0C42969AFFA002A63D6 /* MicrophonePowerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0C32969AFFA002A63D6 /* MicrophonePowerObserver.swift */; };
 		2326C0C62969B73F002A63D6 /* IOSVoiceToTextParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0C52969B73F002A63D6 /* IOSVoiceToTextParser.swift */; };
 		2326C0C92969C901002A63D6 /* IOSVoiceToTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2326C0C82969C901002A63D6 /* IOSVoiceToTextViewModel.swift */; };
@@ -50,6 +51,7 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		231DEC1C2978ADD00011B55D /* StringResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringResource.swift; sourceTree = "<group>"; };
 		2326C0C32969AFFA002A63D6 /* MicrophonePowerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrophonePowerObserver.swift; sourceTree = "<group>"; };
 		2326C0C52969B73F002A63D6 /* IOSVoiceToTextParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVoiceToTextParser.swift; sourceTree = "<group>"; };
 		2326C0C82969C901002A63D6 /* IOSVoiceToTextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVoiceToTextViewModel.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				238162B429636737003752F3 /* Colors.swift */,
 				23E9F3112964C1AE004C465D /* GradientSurface.swift */,
 				23FA7102296622D50074CF08 /* ViewExtension.swift */,
+				231DEC1C2978ADD00011B55D /* StringResource.swift */,
 			);
 			path = presentation;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				238162C2296381F2003752F3 /* IOSTranslateViewModel.swift in Sources */,
 				238162B529636737003752F3 /* Colors.swift in Sources */,
 				238162C029638017003752F3 /* SwapLanguageButton.swift in Sources */,
+				231DEC1D2978ADD00011B55D /* StringResource.swift in Sources */,
 				238162BE296379F6003752F3 /* SmallLanguageItem.swift in Sources */,
 				238162C429638221003752F3 /* TranslateScreen.swift in Sources */,
 				23FA70FF29660C760074CF08 /* TextToSpeech.swift in Sources */,

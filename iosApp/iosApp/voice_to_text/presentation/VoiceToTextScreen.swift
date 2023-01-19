@@ -67,7 +67,7 @@ struct VoiceToTextScreen: View {
             switch displayState {
             case .waitingToTalk:
                 return AnyView(
-                    Text("Click record and start talking.")
+                    Text(Resources.string.start_talking.localized)
                         .font(.title2)
                 )
             case .displayingResults:

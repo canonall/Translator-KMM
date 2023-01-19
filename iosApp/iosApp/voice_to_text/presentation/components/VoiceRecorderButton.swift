@@ -24,7 +24,7 @@ struct VoiceRecorderButton: View {
             }
         }
         .frame(maxWidth: 100.0, maxHeight: 100.0)
-        .accessibilityIdentifier("Voice recorder button")
+        .accessibilityIdentifier(Resources.string.voice_recorder.localized)
     }
     
     var icon: some View {

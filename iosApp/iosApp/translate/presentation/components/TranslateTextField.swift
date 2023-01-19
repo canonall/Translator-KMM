@@ -67,7 +67,7 @@ private extension TranslateTextField {
                 .foregroundColor(Color.onSurface)
                 .overlay(alignment: .bottomTrailing) {
                     ProgressButton(
-                        text: "Translate",
+                        text: Resources.string.translate.localized,
                         isLoading: isTranslating,
                         onClick: {
                             onTranslateEvent(TranslateEvent.Translate())
