@@ -48,5 +48,10 @@
 	</array>
 	<key>UILaunchScreen</key>
 	<dict/>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>Turkish</string>
+	</array>
 </dict>
 </plist>
