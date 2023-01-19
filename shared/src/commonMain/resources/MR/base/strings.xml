@@ -17,6 +17,8 @@
     <string name="record_audio">Record audio</string>
     <string name="error_speech_recognition_unavailable">Speech recognition is not available</string>
     <string name="error_speech_recognition_failed">Speech recognition is failed due to an error.</string>
+    <string name="permission_record_voice">You need to grant permission to record your voice.</string>
+    <string name="permission_transcribe_audio">You need to grant permission to transcribe audio.</string>
     <string name="stop_recording">Stop recording</string>
     <string name="apply">Apply</string>
     <string name="record_again">Record again</string>
@@ -27,4 +29,5 @@
     <string name="from_language_dropdown_content_description">from language dropdown menu</string>
     <string name="original_text">original text</string>
     <string name="translated_text">translated text</string>
+    <string name="voice_recorder">voice recorder</string>
 </resources>

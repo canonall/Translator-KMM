@@ -17,6 +17,8 @@
     <string name="record_audio">Sesi kaydet</string>
     <string name="error_speech_recognition_unavailable">Konuşma tanımlama aktif değilç</string>
     <string name="error_speech_recognition_failed">onuşma tanımlama bir hata nedeniyle başarısız oldu.</string>
+    <string name="permission_record_voice">Sesinizi kaydebilmek için gerekli uygulama iznini vermelisiniz.</string>
+    <string name="permission_transcribe_audio">Konuşmanızı çevirebilmek için gerekli uygulama iznini vermelisiniz.</string>
     <string name="stop_recording">Kaydetmeyi durdur</string>
     <string name="apply">Uygula</string>
     <string name="record_again">Tekrar kaydet</string>
@@ -27,4 +29,5 @@
     <string name="from_language_dropdown_content_description">çevrilecek dil seçimi menüsü</string>
     <string name="original_text">orijinal metin</string>
     <string name="translated_text">çevrilen metin</string>
+    <string name="voice_recorder">konuşma kaydedici</string>
 </resources>
