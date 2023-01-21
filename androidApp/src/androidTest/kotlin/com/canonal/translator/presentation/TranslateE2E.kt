@@ -5,7 +5,7 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.core.app.ApplicationProvider
 import com.canonal.translator.android.MainActivity
-import com.canonal.translator.android.R
+import com.canonal.translator.R
 import com.canonal.translator.android.di.AppModule
 import com.canonal.translator.android.voice_to_text.di.VoiceToTextModule
 import com.canonal.translator.core.presentation.UiLanguage
@@ -17,8 +17,11 @@ import com.canonal.translator.translate.domain.translate.TranslateClient
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -64,6 +67,10 @@ class TranslateE2E {
             .onNodeWithText(translationString)
             .assertIsDisplayed()
 
+        withContext(Dispatchers.Default) {
+            delay(1500L)
+        }
+
         composeRule
             .onNodeWithText(client.translatedTest)
             .assertIsDisplayed()
@@ -90,6 +97,10 @@ class TranslateE2E {
             .onNodeWithTag("tr")
             .performScrollTo()
             .performClick()
+
+        withContext(Dispatchers.Default) {
+            delay(1000L)
+        }
 
         composeRule
             .onNodeWithText(client.translatedTest)

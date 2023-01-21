@@ -32,13 +32,13 @@ final class iosAppUITests: XCTestCase {
     func testRecordAndtranslate() {
         app.buttons["Record audio"].tap()
         
-        app.buttons["Voice recorder button"].tap()
-        app.buttons["Voice recorder button"].tap()
+        app.buttons["voice recorder"].tap()
+        app.buttons["voice recorder"].tap()
         
         // "test result" is defined in iosMain but we don't have access. Thus, we hard code it
         XCTAssert(app.staticTexts["test result"].waitForExistence(timeout: 2))
         
-        app.buttons["Voice recorder button"].tap()
+        app.buttons["voice recorder"].tap()
         
         XCTAssert(app.textViews["test result"].waitForExistence(timeout: 2))
         

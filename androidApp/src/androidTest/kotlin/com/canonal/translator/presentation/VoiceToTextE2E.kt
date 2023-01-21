@@ -7,7 +7,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.rule.GrantPermissionRule
 import com.canonal.translator.android.MainActivity
-import com.canonal.translator.android.R
+import com.canonal.translator.R
 import com.canonal.translator.android.di.AppModule
 import com.canonal.translator.android.voice_to_text.di.VoiceToTextModule
 import com.canonal.translator.translate.data.remote.FakeTranslateClient
@@ -17,9 +17,7 @@ import com.canonal.translator.voice_to_text.domain.VoiceToTextParser
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
@@ -89,6 +87,10 @@ class VoiceToTextE2E {
         composeRule
             .onNodeWithText(context.getString(R.string.translate), ignoreCase = true)
             .performClick()
+
+        withContext(Dispatchers.Default) {
+            delay(1500L)
+        }
 
         composeRule
             .onNodeWithText(parser.voiceResult)
