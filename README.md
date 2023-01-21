@@ -11,7 +11,7 @@ A translator app built with Kotlin Mobile multiplatform and MVI based on Philipp
 </p>
 
 
-## Screeshots
+## Screeshots :camera_flash:
 
 ### Android
 <p align="center">
@@ -25,7 +25,7 @@ A translator app built with Kotlin Mobile multiplatform and MVI based on Philipp
 <img src="Preview/VoiceToText_IOS.gif" width="20%"/>
 </p>
 
-## Tech stack & libraries
+## Tech stack & Libraries :books:
 - [Kotlin Mobile Multiplatform](https://kotlinlang.org/lp/mobile/) - create navite apps by sharing common code between iOS and Android apps.
   - [Kotlin](https://kotlinlang.org)
   - [Swift](https://developer.apple.com/swift/)
@@ -46,4 +46,32 @@ A translator app built with Kotlin Mobile multiplatform and MVI based on Philipp
   - [Test runner](https://developer.android.com/jetpack/androidx/releases/test)
   - [Test rules](https://developer.android.com/jetpack/androidx/releases/test)
 
-In the shared module, only the libraries written in Kotlin are allowed to use. For example Retrofit is not compatible for shared module. 
+In the shared module, only the libraries written in Kotlin are allowed to use. For example Retrofit is not compatible for the shared module. 
+
+## Architecture :straight_ruler:
+
+The app is built with MVI pattern. Here, we have a shared viewmodel that holds the business logic. Thanks to the KMM, we implement the viewmodel once in common code and use it both in Android and iOS platforms. Optionally, wrapper viewmodels are created for Android and in iOS to make the use of coroutine scopes easier.
+
+### MVI (Model-View-Intent)
+
+<p align="center">
+  <img src="Preview/MVI.png"/>
+</p>
+
+MVI stands for Model-View-Intent, which is a pattern for structuring Android applications. The pattern emphasizes separating the business logic and the data from the UI, and using a unidirectional data flow to manage the state of the application. This can make the code more organized, testable, and maintainable.
+
+- **Model**: The Model represents the data or state of the application. It is responsible for storing and managing the data that is displayed in the UI. The Model is typically implemented as a set of data classes that represent the various types of data used in the application. It can also include logic for modifying and querying the data, such as validation and persistence. The Model is typically unaware of the View and does not interact with it directly.
+
+<p align="center">
+  <img src="Preview/model.png" width="90%"/>
+  Shared Translate Model and VoiceToText Model
+</p>
+
+- **View**: The View represents the visual representation of the data. It is responsible for displaying the data from the Model in the UI and for handling user interactions. The View is typically implemented as an Android activity or fragment. The View is also responsible for transforming the user's actions into intents/events and sending them to the Presenter.
+- **Intent**: The Intent represents the user's intentions or actions. It is a way to communicate the user's intentions to the Presenter. The Intent is typically implemented as a simple data class or sealed class, which holds the type of the intent and any additional data needed to handle the intent. The View is responsible for transforming the user's actions into intents and sending them to the Presenter. The Presenter will then handle the intent and update the Model accordingly, and the View will be updated with the new data.
+
+<p align="center">
+  <img src="Preview/intent.png" width="%90"/>
+  Shared Translate Intent and VoiceToText Intent
+</p>
+  
