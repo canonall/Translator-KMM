@@ -1,13 +1,21 @@
 <h1 align="center">Translator (KMM)</h1></br>
 <p align="center">  
-A translator app built with Kotlin Mobile multiplatform and MVI based on Philipp Lackner's <a href="https://pl-coding.com/building-industry-level-multiplatform-apps-with-kmm">KMM course</a>. After completing the course I made several improvements by adding navigation library, common resource library, localization for turkish language and more test cases. You can find more detailed information about the overall app structure and my improvements.
+A translator app built with Kotlin Mobile multiplatform and MVI based on Philipp Lackner's <a href="https://pl-coding.com/building-industry-level-multiplatform-apps-with-kmm">KMM course</a>. You can find the detailed tech stack and architecture in the below sections.
 </p>
 </br>
 
+After completing the course I made the following changes/improvements:
+  - Replaced [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) with [Compose Destinations](https://github.com/raamcosta/compose-destinations) library in Android
+  - Added 12 more UI test cases for Android -> Total UI test count: 13 in Android and 1 in iOS (will increase in the future for iOS)
+  - Added 14 more unit test cases for shared business logic -> Total unit test count: 16
+  - Added [libs.versions.toml](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) file as version catalog
+  - Added [moko-resources library](https://github.com/icerockdev/moko-resources) to share strings between Android and iOS.
+  - Added [detekt](https://github.com/detekt/detekt) for static code analysis for Kotlin.
+
 <p align="center">
-  <a href="https://android-arsenal.com/api?level=24"><img alt="API" src="https://img.shields.io/badge/API-24%2B-yellow"/></a>
-  <a href="https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-15-release-notes"><img alt="IOS" src="https://img.shields.io/badge/IOS-15%2B-yellow"/></a>
-  <a href="https://github.com/canonall"><img alt="Profile" src="https://img.shields.io/badge/git-canonall-yellow"/></a> 
+  <a href="https://android-arsenal.com/api?level=24"><img alt="API" src="https://img.shields.io/badge/API-24%2B-red"/></a>
+  <a href="https://developer.apple.com/documentation/ios-ipados-release-notes/ios-ipados-15-release-notes"><img alt="IOS" src="https://img.shields.io/badge/IOS-15%2B-red"/></a>
+  <a href="https://github.com/canonall"><img alt="Profile" src="https://img.shields.io/badge/git-canonall-red"/></a> 
 </p>
 
 
@@ -46,11 +54,12 @@ A translator app built with Kotlin Mobile multiplatform and MVI based on Philipp
   - [Test runner](https://developer.android.com/jetpack/androidx/releases/test)
   - [Test rules](https://developer.android.com/jetpack/androidx/releases/test)
 
-In the shared module, only the libraries written in Kotlin are allowed to use. For example Retrofit is not compatible for the shared module. 
+
+*In the shared module, only libraries written in Kotlin are allowed to be used. For example, Retrofit is not compatible with the shared module.*
 
 ## Architecture :straight_ruler:
 
-The app is built with MVI pattern. Here, we have a shared viewmodel that holds the business logic. Thanks to the KMM, we implement the viewmodel once in common code and use it both in Android and iOS platforms. Optionally, wrapper viewmodels are created for Android and in iOS to make the use of coroutine scopes easier.
+The app is built using the MVI pattern. Here, we have a shared ViewModel that holds the business logic. Thanks to KMM, we implement the ViewModel once in the common code and use it on both the Android and iOS platforms. Optionally, wrapper ViewModels are created for Android and iOS to make the use of coroutine scopes easier.
 
 ### MVI (Model-View-Intent)
 
@@ -64,7 +73,7 @@ MVI stands for Model-View-Intent, which is a pattern for structuring Android app
 
 <p align="center">
   <img src="Preview/model.png" width="90%"/>
-  Shared Translate Model and VoiceToText Model
+  <i>Shared Translate Model and VoiceToText Model</i>
 </p>
 
 - **View**: The View represents the visual representation of the data. It is responsible for displaying the data from the Model in the UI and for handling user interactions. The View is typically implemented as an Android activity or fragment. The View is also responsible for transforming the user's actions into intents/events and sending them to the Presenter.
@@ -72,6 +81,5 @@ MVI stands for Model-View-Intent, which is a pattern for structuring Android app
 
 <p align="center">
   <img src="Preview/intent.png" width="%90"/>
-  Shared Translate Intent and VoiceToText Intent
+  <i>Shared Translate Intent and VoiceToText Intent</i>
 </p>
-  
