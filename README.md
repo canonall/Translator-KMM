@@ -72,7 +72,7 @@ MVI stands for Model-View-Intent, which is a pattern for structuring Android app
 - **Model**: The Model represents the data or state of the application. It is responsible for storing and managing the data that is displayed in the UI. The Model is typically implemented as a set of data classes that represent the various types of data used in the application. It can also include logic for modifying and querying the data, such as validation and persistence. The Model is typically unaware of the View and does not interact with it directly.
 
 <p align="center">
-  <img src="Preview/model.png" width="90%"/>
+  <img src="Preview/model.png"/>
   <i>Shared Translate Model and VoiceToText Model</i>
 </p>
 
