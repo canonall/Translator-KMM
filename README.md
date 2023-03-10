@@ -6,7 +6,7 @@ A translator app built with Kotlin Mobile multiplatform and MVI based on Philipp
 
 After completing the course I made the following changes/improvements:
   - Replaced [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) with [Compose Destinations](https://github.com/raamcosta/compose-destinations) library in Android
-  - Added 12 more UI test cases for Android -> Total UI test count: 13 in Android and 1 in iOS (will increase in the future for iOS)
+  - Added 12 more UI test cases for Android -> Total UI test count: 13 in Android and 1 in iOS
   - Added 14 more unit test cases for shared business logic -> Total unit test count: 16
   - Added [libs.versions.toml](https://docs.gradle.org/current/userguide/platforms.html#sub:conventional-dependencies-toml) file as version catalog
   - Added [moko-resources library](https://github.com/icerockdev/moko-resources) to share strings between Android and iOS.
@@ -21,13 +21,19 @@ After completing the course I made the following changes/improvements:
 
 ## Screeshots :camera_flash:
 
-### Android
+<p align="center">
+Android
+</p>
+
 <p align="center">
 <img src="Preview/Translate_android.gif" width="20%"/>
 <img src="Preview/VoiceToText_android.gif" width="20%"/>
 </p>
 
-### iOS
+<p align="center">
+IOS
+</p>
+
 <p align="center">
 <img src="Preview/Translate_IOS.gif" width="20%"/>
 <img src="Preview/VoiceToText_IOS.gif" width="20%"/>
